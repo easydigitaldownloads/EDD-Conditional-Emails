@@ -51,8 +51,9 @@ function edd_conditional_emails_table() {
         <thead>
             <tr>
                 <th style="width: 350%; padding-left: 10px;" scope="col"><?php _e( 'Subject', 'edd-conditional-emails' ); ?></th>
-                <th style="width: 350%;" scope="col"><?php _e( 'Condition', 'edd-conditional-emails' ); ?></th>
-                <th scope="col"><?php _e( 'Actions', 'edd-conditional-emails' ); ?></th>
+                <th style="width: 200%; padding-left: 10px;" scope="col"><?php _e( 'Condition', 'edd-conditional-emails' ); ?></th>
+                <th style="width: 200%; padding-left: 10px;" scope="col"><?php _e( 'Send To', 'edd-conditional-emails' ); ?></th>
+                <th scope="col" style="padding-left: 10px;"><?php _e( 'Actions', 'edd-conditional-emails' ); ?></th>
             </tr>
         </thead>
         <?php
@@ -69,10 +70,12 @@ function edd_conditional_emails_table() {
             foreach( $emails as $key => $email ) {
                 $meta   = get_post_meta( $email->ID, '_edd_conditional_email', true );
                 $status = edd_conditional_emails_get_status( $meta );
+                $send_to= edd_conditional_emails_get_email( $meta );
                 
                 echo '<tr' . ( $i % 2 == 0 ? ' class="alternate"' : '' ) . '>';
                 echo '<td>' . esc_html( $meta['subject'] ) . '</td>';
                 echo '<td>' . $status . '</td>';
+                echo '<td>' . $send_to . '</td>';
                 echo '<td>';
                 echo '<a href="' . esc_url( admin_url( 'edit.php?post_type=download&page=edd-conditional-email&edd-ca-action=edit-conditional-email&email=' . $email->ID ) ) . '" class="edd-edit-conditional-email" data-key="' . esc_attr( $email->ID ) . '">' . __( 'Edit', 'edd-conditional-emails' ) . '</a>&nbsp;|';
                 echo '<a href="' . esc_url( wp_nonce_url( admin_url( 'edit.php?post_type=download&page=edd-conditional-email&edd_action=delete_conditional_email&email=' . $email->ID ) ) ) . '" class="edd-delete">' . __( 'Delete', 'edd-conditional-emails' ) . '</a>';
@@ -111,9 +114,11 @@ function edd_conditional_emails_render_edit() {
     }
 
     $defaults = array(
-        'condition'     => false,
+        'condition'     => 'purchase-status',
         'status_from'   => false,
         'status_to'     => false,
+        'send_to'       => 'user',
+        'custom_email'  => '',
         'subject'       => '',
         'message'       => ''
     );
@@ -125,7 +130,7 @@ function edd_conditional_emails_render_edit() {
         <form id="edd-edit-conditional-email" action="" method="post">
             <table class="form-table">
                 <tbody>
-                    <tr style="display: none;">
+                    <tr>
                         <th scope="row" valign="top">
                             <label for="edd-conditional-email-condition"><?php _e( 'Email Condition', 'edd-conditional-emails' ); ?></label>
                         </th>
@@ -133,7 +138,7 @@ function edd_conditional_emails_render_edit() {
                             <select name="condition" id="edd-conditional-email-condition">
                                 <?php
                                 foreach( edd_conditional_emails_conditions() as $value => $label ) {
-                                    echo '<option value="' . esc_attr( $value ) . '" ' . selected( $value, $meta['condition'] ) . '>' . esc_attr( $label ) . '</option>';
+                                    echo '<option value="' . esc_attr( $value ) . '" ' . selected( $value, $meta['condition'], false ) . '>' . esc_attr( $label ) . '</option>';
                                 }
                                 ?>
                             </select>
@@ -148,7 +153,7 @@ function edd_conditional_emails_render_edit() {
                             <select name="status_from" id="edd-conditional-email-status-from">
                                 <?php
                                 foreach( edd_get_payment_statuses() as $key => $status ) {
-                                    echo '<option value="' . esc_attr( $key ) . '" ' . selected( $key, $meta['status_from'] ) . '>' . esc_attr( $status ) . '</option>';
+                                    echo '<option value="' . esc_attr( $key ) . '" ' . selected( $key, $meta['status_from'], false ) . '>' . esc_attr( $status ) . '</option>';
                                 }
                                 ?>
                             </select>
@@ -162,10 +167,31 @@ function edd_conditional_emails_render_edit() {
                             <select name="status_to" id="edd-conditional-email-status-to">
                                 <?php
                                 foreach( edd_get_payment_statuses() as $key => $status ) {
-                                    echo '<option value="' . esc_attr( $key ) . '" ' . selected( $key, $meta['status_to'] ) . '>' . esc_attr( $status ) . '</option>';
+                                    echo '<option value="' . esc_attr( $key ) . '" ' . selected( $key, $meta['status_to'], false ) . '>' . esc_attr( $status ) . '</option>';
                                 }
                                 ?>
                             </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row" valign="top">
+                            <label for="edd-conditional-email-send-to"><?php _e( 'Send To', 'edd-conditional-emails' ); ?></label>
+                        </th>
+                        <td>
+                            <select name="send_to" id="edd-conditional-email-send-to">
+                                <option value="user"<?php echo selected( 'user', $meta['send_to'], false ); ?>><?php _e( 'User', 'edd-conditional-emails' ); ?></option>
+                                <option value="admin"<?php echo selected( 'admin', $meta['send_to'], false ); ?>><?php _e( 'Site Admin', 'edd-conditional-emails' ); ?></option>
+                                <option value="custom"<?php echo selected( 'custom', $meta['send_to'], false ); ?>><?php _e( 'Custom', 'edd-conditional-emails' ); ?></option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row" valign="top">
+                            <label for="edd-conditional-email-custom-email"><?php _e( 'Email Address', 'edd-conditional-emails' ); ?></label>
+                        </th>
+                        <td>
+                            <input name="custom_email" id="edd-conditional-email-custom-email" type="text" value="<?php echo esc_attr( stripslashes( $meta['custom_email'] ) ); ?>" style="width: 300px;" />
+                            <p class="description"><?php _e( 'The email address this notice should be sent to.', 'edd-conditional-emails' ); ?></p>
                         </td>
                     </tr>
                     <tr>
@@ -191,7 +217,6 @@ function edd_conditional_emails_render_edit() {
             </table>
             <p class="submit">
                 <input type="hidden" name="email-id" value="<?php echo ( $email_id ? $email_id : 0 ); ?>" />
-                <input type="hidden" name="condition" value="payment-status" />
                 <input type="hidden" name="edd-action" value="edit_conditional_email" />
                 <input type="hidden" name="edd-conditional-emails-nonce" value="<?php echo wp_create_nonce( 'edd_conditional_emails_nonce' ); ?>" />
                 <input type="submit" value="<?php echo ( $action == 'edit-conditional-email' ? __( 'Edit Email', 'edd-conditional-emails' ) : __( 'Add Email', 'edd-conditional-emails' ) ); ?>" class="button-primary" />

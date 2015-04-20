@@ -31,6 +31,8 @@ function edd_edit_conditional_email( $data ) {
     $condition      = isset( $data['condition'] ) ? esc_attr( $data['condition'] ) : 'payment-status';
     $status_from    = isset( $data['status_from'] ) ? esc_attr( $data['status_from'] ) : false;
     $status_to      = isset( $data['status_to'] ) ? esc_attr( $data['status_to'] ) : false;
+    $send_to        = isset( $data['send_to'] ) ? esc_attr( $data['send_to'] ) : 'user';
+    $custom_email   = isset( $data['custom_email'] ) ? esc_attr( $data['custom_email'] ) : false;
 
     if( $condition == 'payment-status' ) {
         $subject = ( ! empty( $data['subject'] ) ? sanitize_text_field( $data['subject'] ) : __( 'The status of your purchase has changed', 'edd-conditional-emails' ) );
@@ -39,6 +41,24 @@ function edd_edit_conditional_email( $data ) {
             $message = 'Hello {name},
 
 The status of your purchase has changed to ' . ucwords( $status_to ) . '.';
+        }
+    }
+    
+    if( $condition == 'abandoned-cart' ) {
+        if( $send_to == 'user' ) {
+            $subject = ( ! empty( $data['subject'] ) ? sanitize_text_field( $data['subject'] ) : __( 'Oops! You abandoned your purchase on {sitename}', 'edd-conditional-emails' ) );
+
+            if( empty( $message ) ) {
+                $message = 'Hello {name},
+
+We noticed that you recently abandoned a purchase on {sitename}. Can we convince you to come back?';
+            }
+        } else {
+            $subject = ( ! empty( $data['subject'] ) ? sanitize_text_field( $data['subject'] ) : __( 'A purchase has been abandoned on {sitename}', 'edd-conditional-emails' ) );
+
+            if( empty( $message ) ) {
+                $message = 'The user with email address {user_email} has abandoned their recent purchase on {sitename}. Maybe you should try to get them back!';
+            }
         }
     }
 
@@ -63,13 +83,15 @@ The status of your purchase has changed to ' . ucwords( $status_to ) . '.';
         'condition'     => $condition,
         'status_from'   => $status_from,
         'status_to'     => $status_to,
+        'send_to'       => $send_to,
+        'custom_email'  => $custom_email,
         'subject'       => $subject,
         'message'       => $message
     );
 
     update_post_meta( $email_id, '_edd_conditional_email', $meta );
 
-    wp_safe_redirect( admin_url( 'edit.php?post_type=download&page=edd-settings&tab=emails' ) );
+    wp_safe_redirect( admin_url( 'edit.php?post_type=download&page=edd-settings&tab=emails#edd-conditional-emails-table' ) );
     exit;
 }
 add_action( 'edd_edit_conditional_email', 'edd_edit_conditional_email' );
@@ -97,7 +119,7 @@ function edd_delete_conditional_email( $data ) {
 
     wp_delete_post( $data['email'] );
 
-    wp_safe_redirect( admin_url( 'edit.php?post_type=download&page=edd-settings&tab=emails' ) );
+    wp_safe_redirect( admin_url( 'edit.php?post_type=download&page=edd-settings&tab=emails#edd-conditional-emails-table' ) );
     exit;
 }
 add_action( 'edd_delete_conditional_email', 'edd_delete_conditional_email' );

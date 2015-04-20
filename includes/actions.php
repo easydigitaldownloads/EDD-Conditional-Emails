@@ -35,8 +35,19 @@ function edd_conditional_emails_status_change_email( $payment_id, $new_status, $
 
             if( $meta['condition'] == 'payment-status' ) {
                 if( $meta['status_from'] == $old_status && $meta['status_to'] == $new_status ) {
-                    $email_to   = esc_attr( edd_get_payment_user_email( $payment_id ) );
-                    $message    = edd_do_email_tags( $meta['message'], $payment_id );
+                    if( $meta['send_to'] == 'user' ) {
+                        $email_to = esc_attr( edd_get_payment_user_email( $payment_id ) );
+                    } elseif( $meta['send_to'] == 'admin' ) {
+                        $email_to = get_option( 'admin_email' );
+                    } elseif( $meta['send_to'] == 'custom' ) {
+                        if( ! isset( $meta['custom_email'] ) || $meta['custom_email'] == '' ) {
+                            $email_to = get_option( 'admin_email' );
+                        } else {
+                            $email_to = esc_attr( $meta['custom_email'] );
+                        }
+                    }
+
+                    $message = edd_do_email_tags( $meta['message'], $payment_id );
 
                     if( class_exists( 'EDD_Emails' ) ) {
                         EDD()->emails->send( $email_to, $meta['subject'], $message );
