@@ -78,7 +78,7 @@ function edd_conditional_emails_table() {
                 echo '<td>' . $send_to . '</td>';
                 echo '<td>';
                 echo '<a href="' . esc_url( admin_url( 'edit.php?post_type=download&page=edd-conditional-email&edd-ca-action=edit-conditional-email&email=' . $email->ID ) ) . '" class="edd-edit-conditional-email" data-key="' . esc_attr( $email->ID ) . '">' . __( 'Edit', 'edd-conditional-emails' ) . '</a>&nbsp;|';
-                echo '<a href="' . esc_url( wp_nonce_url( admin_url( 'edit.php?post_type=download&page=edd-conditional-email&edd_action=delete_conditional_email&email=' . $email->ID ) ) ) . '" class="edd-delete">' . __( 'Delete', 'edd-conditional-emails' ) . '</a>';
+                echo '<a href="' . wp_nonce_url( admin_url( 'edit.php?post_type=download&page=edd-conditional-email&edd_action=delete_conditional_email&email=' . $email->ID ) ) . '" class="edd-delete">' . __( 'Delete', 'edd-conditional-emails' ) . '</a>';
                 echo '</td>';
                 echo '</tr>';
 
@@ -125,7 +125,7 @@ function edd_conditional_emails_render_edit() {
     $meta = array_merge( $defaults, $meta );
     ?>
     <div class="wrap">
-        <h2><?php ( $action == 'edit-conditional-email' ? _e( 'Edit Email', 'edd-conditional-emails' ) : _e( 'Add Email', 'edd-conditional-emails' ) ); ?> <a href="<?php echo admin_url( 'edit.php?post_type=download&page=edd-settings&tab=emails' ); ?>" class="add-new-h2"><?php _e( 'Go Back', 'edd' ); ?></a></h2>
+        <h2><?php ( $action == 'edit-conditional-email' ? _e( 'Edit Email', 'edd-conditional-emails' ) : _e( 'Add Email', 'edd-conditional-emails' ) ); ?> <a href="<?php echo esc_url( admin_url( 'edit.php?post_type=download&page=edd-settings&tab=emails' ) ); ?>" class="add-new-h2"><?php _e( 'Go Back', 'edd' ); ?></a></h2>
 
         <form id="edd-edit-conditional-email" action="" method="post">
             <table class="form-table">
