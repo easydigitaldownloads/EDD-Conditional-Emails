@@ -1,0 +1,14 @@
+/**
+ * Admin CSS
+ *
+ * @package     EDD\ConditionalEmails\CSS\Admin
+ * @since       1.0.0
+ */
+
+
+/* General styles
+-------------------------------------------------------------- */
+.edd-conditional-email-tags-list {
+    font-size: 0.85em !important;
+    margin-left: 15px;
+}
