@@ -3,7 +3,7 @@
  * Plugin Name:     Easy Digital Downloads - Conditional Emails
  * Plugin URI:      https://easydigitaldownloads.com/extensions/conditional-emails
  * Description:     Send notification emails based on conditional events
- * Version:         1.0.0
+ * Version:         1.0.1
  * Author:          Daniel J Griffiths
  * Author URI:      http://section214.com
  * Text Domain:     edd-conditional-emails
@@ -65,7 +65,7 @@ if( ! class_exists( 'EDD_Conditional_Emails' ) ) {
          */
         private function setup_constants() {
             // Plugin version
-            define( 'EDD_CONDITIONAL_EMAILS_VER', '1.0.0' );
+            define( 'EDD_CONDITIONAL_EMAILS_VER', '1.0.1' );
 
             // Plugin path
             define( 'EDD_CONDITIONAL_EMAILS_DIR', plugin_dir_path( __FILE__ ) );
