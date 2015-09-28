@@ -33,7 +33,7 @@ function edd_conditional_emails_status_change_email( $payment_id, $new_status, $
         foreach( $emails as $key => $email ) {
             $meta = get_post_meta( $email->ID, '_edd_conditional_email', true );
 
-            if( $meta['condition'] == 'payment-status' ) {
+            if( $meta['condition'] == 'payment-status' || $meta['condition'] == 'purchase-status' ) {
                 if( $meta['status_from'] == $old_status && $meta['status_to'] == $new_status ) {
                     if( $meta['send_to'] == 'user' ) {
                         $email_to = esc_attr( edd_get_payment_user_email( $payment_id ) );

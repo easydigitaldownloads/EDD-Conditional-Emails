@@ -34,7 +34,7 @@ function edd_edit_conditional_email( $data ) {
     $send_to        = isset( $data['send_to'] ) ? esc_attr( $data['send_to'] ) : 'user';
     $custom_email   = isset( $data['custom_email'] ) ? esc_attr( $data['custom_email'] ) : false;
 
-    if( $condition == 'purchase-status' ) {
+    if( $condition == 'purchase-status' || $condition == 'payment-status' ) {
         $subject = ( ! empty( $data['subject'] ) ? sanitize_text_field( $data['subject'] ) : __( 'The status of your purchase has changed', 'edd-conditional-emails' ) );
 
         if( empty( $message ) ) {

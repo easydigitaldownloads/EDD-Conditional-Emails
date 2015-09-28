@@ -105,7 +105,7 @@ add_action( 'edd_conditional_emails_table', 'edd_conditional_emails_table' );
 function edd_conditional_emails_render_edit() {
     $action         = isset( $_GET['edd-ca-action'] ) ? sanitize_text_field( $_GET['edd-ca-action'] ) : 'add-conditional-email';
     $email_id       = ( isset( $_GET['email'] ) ? absint( $_GET['email'] ) : false );
-    
+
     // Maybe get email
     if( $email_id ) {
         $meta = get_post_meta( $email_id, '_edd_conditional_email', true );

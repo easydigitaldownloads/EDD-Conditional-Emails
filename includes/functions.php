@@ -37,6 +37,7 @@ function edd_conditional_emails_conditions() {
 function edd_conditional_emails_get_status( $meta = array() ) {
     switch( $meta['condition'] ) {
         case 'purchase-status' :
+        case 'payment-status' :
             $status = sprintf( __( 'Status change (%1$s-%2$s)', 'edd-conditional-emails' ), $meta['status_from'], $meta['status_to'] );
             break;
         case 'abandoned-cart' :
