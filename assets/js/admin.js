@@ -8,11 +8,17 @@ jQuery(document).ready(function ($) {
         if (selectedItem.val() === 'purchase-status') {
             $('select[id="edd-conditional-email-status-from"]').closest('tr').css('display', 'table-row');
             $('select[id="edd-conditional-email-status-to"]').closest('tr').css('display', 'table-row');
+            $('input[id="edd-conditional-email-minimum-amount"]').closest('tr').css('display', 'none');
         } else if (selectedItem.val() === 'abandoned-cart') {
             $('select[id="edd-conditional-email-status-from"]').val('pending');
             $('select[id="edd-conditional-email-status-to"]').val('abandoned');
             $('select[id="edd-conditional-email-status-from"]').closest('tr').css('display', 'none');
             $('select[id="edd-conditional-email-status-to"]').closest('tr').css('display', 'none');
+            $('input[id="edd-conditional-email-minimum-amount"]').closest('tr').css('display', 'none');
+        } else if (selectedItem.val() === 'purchase-amount') {
+            $('select[id="edd-conditional-email-status-from"]').closest('tr').css('display', 'none');
+            $('select[id="edd-conditional-email-status-to"]').closest('tr').css('display', 'none');
+            $('input[id="edd-conditional-email-minimum-amount"]').closest('tr').css('display', 'table-row');
         }
     }).change();
 

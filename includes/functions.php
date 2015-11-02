@@ -21,8 +21,9 @@ if( ! defined( 'ABSPATH' ) ) {
  */
 function edd_conditional_emails_conditions() {
 	$conditions = array(
-		'purchase-status'   => __( 'Purchase Status Change', 'edd-conditional-emails' ),
-		'abandoned-cart'    => __( 'Abandoned Cart', 'edd-conditional-emails' )
+		'purchase-status' => __( 'Purchase Status Change', 'edd-conditional-emails' ),
+		'abandoned-cart'  => __( 'Abandoned Cart', 'edd-conditional-emails' ),
+		'purchase-amount' => __( 'Purchase Amount At Least', 'edd-conditional-emails' )
 	);
 
 	return apply_filters( 'edd_conditional_emails_conditions', $conditions );
@@ -44,6 +45,9 @@ function edd_conditional_emails_get_status( $meta = array() ) {
 			break;
 		case 'abandoned-cart' :
 			$status = __( 'Abandoned cart', 'edd-conditional-emails' );
+			break;
+		case 'purchase-amount' :
+			$status = sprintf( __( 'Purchase amount at least (%1$s)', 'edd-conditional-emails' ), $meta['minimum_amount'] );
 			break;
 		default :
 			$status = __( 'Condition unknown', 'edd-conditional-emails' );

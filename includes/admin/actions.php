@@ -33,40 +33,55 @@ function edd_edit_conditional_email( $data ) {
 	$condition      = isset( $data['condition'] ) ? esc_attr( $data['condition'] ) : 'payment-status';
 	$status_from    = isset( $data['status_from'] ) ? esc_attr( $data['status_from'] ) : false;
 	$status_to      = isset( $data['status_to'] ) ? esc_attr( $data['status_to'] ) : false;
+	$minimum_amount = isset( $data['minimum_amount'] ) ? esc_attr( $data['minimum_amount'] ) : '';
 	$send_to        = isset( $data['send_to'] ) ? esc_attr( $data['send_to'] ) : 'user';
 	$custom_email   = isset( $data['custom_email'] ) ? esc_attr( $data['custom_email'] ) : false;
 
-	if( $condition == 'purchase-status' || $condition == 'payment-status' ) {
-		$subject = ( ! empty( $data['subject'] ) ? sanitize_text_field( $data['subject'] ) : __( 'The status of your purchase has changed', 'edd-conditional-emails' ) );
-
-		if( empty( $message ) ) {
-			$message = 'Hello {name},
-
-The status of your purchase has changed to ' . ucwords( $status_to ) . '.';
-		}
-	}
-
-	if( $condition == 'abandoned-cart' ) {
-		if( $send_to == 'user' ) {
-			$subject = ( ! empty( $data['subject'] ) ? sanitize_text_field( $data['subject'] ) : __( 'Oops! You abandoned your purchase on {sitename}', 'edd-conditional-emails' ) );
+	// Status based
+	if( $condition == 'purchase-status' || $condition == 'payment-status' || $condition == 'abandoned-cart' ) {
+		if( $condition == 'purchase-status' || $condition == 'payment-status' ) {
+			$subject = ( ! empty( $data['subject'] ) ? sanitize_text_field( $data['subject'] ) : __( 'The status of your purchase has changed', 'edd-conditional-emails' ) );
 
 			if( empty( $message ) ) {
 				$message = 'Hello {name},
 
-We noticed that you recently abandoned a purchase on {sitename}. Can we convince you to come back?';
+The status of your purchase has changed to ' . ucwords( $status_to ) . '.';
 			}
-		} else {
-			$subject = ( ! empty( $data['subject'] ) ? sanitize_text_field( $data['subject'] ) : __( 'A purchase has been abandoned on {sitename}', 'edd-conditional-emails' ) );
+		}
 
-			if( empty( $message ) ) {
-				$message = 'The user with email address {user_email} has abandoned their recent purchase on {sitename}. Maybe you should try to get them back!';
+		if( $condition == 'abandoned-cart' ) {
+			if( $send_to == 'user' ) {
+				$subject = ( ! empty( $data['subject'] ) ? sanitize_text_field( $data['subject'] ) : __( 'Oops! You abandoned your purchase on {sitename}', 'edd-conditional-emails' ) );
+
+				if( empty( $message ) ) {
+					$message = 'Hello {name},
+
+We noticed that you recently abandoned a purchase on {sitename}. Can we convince you to come back?';
+				}
+			} else {
+				$subject = ( ! empty( $data['subject'] ) ? sanitize_text_field( $data['subject'] ) : __( 'A purchase has been abandoned on {sitename}', 'edd-conditional-emails' ) );
+
+				if( empty( $message ) ) {
+					$message = 'The user with email address {user_email} has abandoned their recent purchase on {sitename}. Maybe you should try to get them back!';
+				}
 			}
+		}
+
+		if( $status_from == $status_to ) {
+			echo '<div class="error settings-error"><p><strong>' . __( '"Status From" and "Status To" cannot be set to the same value!', 'edd-conditional-emails' ) . '</strong></p></div>';
+			return;
 		}
 	}
 
-	if( $status_from == $status_to ) {
-		echo '<div class="error settings-error"><p><strong>' . __( '"Status From" and "Status To" cannot be set to the same value!', 'edd-conditional-emails' ) . '</strong></p></div>';
-		return;
+	// Amount based
+	if( $condition == 'purchase-amount' ) {
+		$subject = ( ! empty( $data['subject'] ) ? sanitize_text_field( $data['subject'] ) : __( 'Thanks for purchasing more than {price} on {sitename}!', 'edd-conditional-emails' ) );
+
+		if( empty( $message ) ) {
+			$message = 'Hello {name},
+
+We just wanted to drop you a quick note to thank you for being such an awesome customer!';
+		}
 	}
 
 	$email_id   = ( ! empty( $data['email-id'] ) ? absint( $data['email-id'] ) : false );
@@ -82,13 +97,14 @@ We noticed that you recently abandoned a purchase on {sitename}. Can we convince
 	}
 
 	$meta = array(
-		'condition'     => $condition,
-		'status_from'   => $status_from,
-		'status_to'     => $status_to,
-		'send_to'       => $send_to,
-		'custom_email'  => $custom_email,
-		'subject'       => $subject,
-		'message'       => $message
+		'condition'      => $condition,
+		'status_from'    => $status_from,
+		'status_to'      => $status_to,
+		'minimum_amount' => $minimum_amount,
+		'send_to'        => $send_to,
+		'custom_email'   => $custom_email,
+		'subject'        => $subject,
+		'message'        => $message
 	);
 
 	update_post_meta( $email_id, '_edd_conditional_email', $meta );

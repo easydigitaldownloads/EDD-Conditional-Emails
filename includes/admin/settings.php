@@ -116,13 +116,14 @@ function edd_conditional_emails_render_edit() {
 	}
 
 	$defaults = array(
-		'condition'     => 'purchase-status',
-		'status_from'   => false,
-		'status_to'     => false,
-		'send_to'       => 'user',
-		'custom_email'  => '',
-		'subject'       => '',
-		'message'       => ''
+		'condition'      => 'purchase-status',
+		'status_from'    => false,
+		'status_to'      => false,
+		'minimum_amount' => '',
+		'send_to'        => 'user',
+		'custom_email'   => '',
+		'subject'        => '',
+		'message'        => ''
 	);
 	$meta = array_merge( $defaults, $meta );
 	?>
@@ -173,6 +174,15 @@ function edd_conditional_emails_render_edit() {
 								}
 								?>
 							</select>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row" valign="top">
+							<label for="edd-conditional-email-minimum-amount"><?php _e( 'Minimum Purchase Amount', 'edd-conditional-emails' ); ?></label>
+						</th>
+						<td>
+							<input name="minimum_amount" id="edd-conditional-email-minimum-amount" type="text" value="<?php echo esc_attr( stripslashes( $meta['minimum_amount'] ) ); ?>" style="width: 100px" />
+							<p class="description"><?php _e( 'The minimum amount that will trigger this email.', 'edd-conditional-emails' ); ?></p>
 						</td>
 					</tr>
 					<tr>
