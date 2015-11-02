@@ -158,7 +158,7 @@ if( ! class_exists( 'EDD_Conditional_Emails' ) ) {
 function edd_conditional_emails_load() {
 	if( ! class_exists( 'Easy_Digital_Downloads' ) ) {
 		if( ! class_exists( 'EDD_Extension_Activation' ) ) {
-			require_once 'includes/class.extension-activation.php';
+			require_once 'includes/libraries/class.extension-activation.php';
 		}
 
 		$activation = new EDD_Extension_Activation( plugin_dir_path( __FILE__ ), basename( __FILE__ ) );
