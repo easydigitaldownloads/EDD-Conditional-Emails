@@ -8,7 +8,9 @@
 
 
 // Exit if accessed directly
-if( ! defined( 'ABSPATH' ) ) exit;
+if( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 
 /**
@@ -18,12 +20,12 @@ if( ! defined( 'ABSPATH' ) ) exit;
  * @return      array $conditions The available conditions
  */
 function edd_conditional_emails_conditions() {
-    $conditions = array(
-        'purchase-status'   => __( 'Purchase Status Change', 'edd-conditional-emails' ),
-        'abandoned-cart'    => __( 'Abandoned Cart', 'edd-conditional-emails' )
-    );
+	$conditions = array(
+		'purchase-status'   => __( 'Purchase Status Change', 'edd-conditional-emails' ),
+		'abandoned-cart'    => __( 'Abandoned Cart', 'edd-conditional-emails' )
+	);
 
-    return apply_filters( 'edd_conditional_emails_conditions', $conditions );
+	return apply_filters( 'edd_conditional_emails_conditions', $conditions );
 }
 
 
@@ -35,20 +37,20 @@ function edd_conditional_emails_conditions() {
  * @return      string $status The status line
  */
 function edd_conditional_emails_get_status( $meta = array() ) {
-    switch( $meta['condition'] ) {
-        case 'purchase-status' :
-        case 'payment-status' :
-            $status = sprintf( __( 'Status change (%1$s-%2$s)', 'edd-conditional-emails' ), $meta['status_from'], $meta['status_to'] );
-            break;
-        case 'abandoned-cart' :
-            $status = __( 'Abandoned cart', 'edd-conditional-emails' );
-            break;
-        default :
-            $status = __( 'Condition unknown', 'edd-conditional-emails' );
-            break;
-    }
+	switch( $meta['condition'] ) {
+		case 'purchase-status' :
+		case 'payment-status' :
+			$status = sprintf( __( 'Status change (%1$s-%2$s)', 'edd-conditional-emails' ), $meta['status_from'], $meta['status_to'] );
+			break;
+		case 'abandoned-cart' :
+			$status = __( 'Abandoned cart', 'edd-conditional-emails' );
+			break;
+		default :
+			$status = __( 'Condition unknown', 'edd-conditional-emails' );
+			break;
+	}
 
-    return apply_filters( 'edd_conditional_email_status', $status, $meta );
+	return apply_filters( 'edd_conditional_email_status', $status, $meta );
 }
 
 
@@ -60,24 +62,24 @@ function edd_conditional_emails_get_status( $meta = array() ) {
  * @return      string $email The requested email data
  */
 function edd_conditional_emails_get_email( $meta = array() ) {
-    if( ! isset( $meta['send_to'] ) || $meta['send_to'] == '' ) {
-        $meta['send_to'] = 'user';
-    }
+	if( ! isset( $meta['send_to'] ) || $meta['send_to'] == '' ) {
+		$meta['send_to'] = 'user';
+	}
 
-    switch( $meta['send_to'] ) {
-        case 'user' :
-            $email = __( 'User', 'edd-conditional-emails' );
-            break;
-        case 'admin' :
-            $email = sprintf( __( 'Site Admin (%s)', 'edd-conditional-emails' ), get_option( 'admin_email' ) );
-            break;
-        case 'custom' :
-            $email = sprintf( __( 'Custom (%s)', 'edd-conditional-emails' ), ( $meta['custom_email'] ? esc_attr( $meta['custom_email'] ) : get_option( 'admin_email' ) ) );
-            break;
-        default:
-            $email = __( 'User', 'edd-conditional-emails' );
-            break;
-    }
+	switch( $meta['send_to'] ) {
+		case 'user' :
+			$email = __( 'User', 'edd-conditional-emails' );
+			break;
+		case 'admin' :
+			$email = sprintf( __( 'Site Admin (%s)', 'edd-conditional-emails' ), get_option( 'admin_email' ) );
+			break;
+		case 'custom' :
+			$email = sprintf( __( 'Custom (%s)', 'edd-conditional-emails' ), ( $meta['custom_email'] ? esc_attr( $meta['custom_email'] ) : get_option( 'admin_email' ) ) );
+			break;
+		default:
+			$email = __( 'User', 'edd-conditional-emails' );
+			break;
+	}
 
-    return apply_filters( 'edd_conditional_emails_get_email', $email, $meta );
+	return apply_filters( 'edd_conditional_emails_get_email', $email, $meta );
 }
