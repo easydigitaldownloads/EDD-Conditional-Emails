@@ -58,20 +58,9 @@ function edd_conditional_emails_pending_payment_email( $email_id, $payment_id ) 
 	if( $payment_status == 'pending' ) {
 		$meta = get_post_meta( $email_id, '_edd_conditional_email', true );
 
-		if( $meta['send_to'] == 'user' ) {
-			$email_to = esc_attr( edd_get_payment_user_email( $payment_id ) );
-		} elseif( $meta['send_to'] == 'admin' ) {
-			$email_to = get_option( 'admin_email' );
-		} elseif( $meta['send_to'] == 'custom' ) {
-			if( ! isset( $meta['custom_email'] ) || $meta['custom_email'] == '' ) {
-				$email_to = get_option( 'admin_email' );
-			} else {
-				$email_to = esc_attr( $meta['custom_email'] );
-			}
-		}
-
-		$message = edd_do_email_tags( $meta['message'], $payment_id );
-		$subject = edd_do_email_tags( $meta['subject'], $payment_id );
+		$email_to = edd_conditional_emails_get_email( $payment_id, $meta );
+		$message  = edd_do_email_tags( $meta['message'], $payment_id );
+		$subject  = edd_do_email_tags( $meta['subject'], $payment_id );
 
 		if( class_exists( 'EDD_Emails' ) ) {
 			EDD()->emails->send( $email_to, $subject, $message );
@@ -112,20 +101,9 @@ function edd_conditional_emails_status_change_email( $payment_id, $new_status, $
 
 			if( $meta['condition'] == 'payment-status' || $meta['condition'] == 'purchase-status' ) {
 				if( $meta['status_from'] == $old_status && $meta['status_to'] == $new_status ) {
-					if( $meta['send_to'] == 'user' ) {
-						$email_to = esc_attr( edd_get_payment_user_email( $payment_id ) );
-					} elseif( $meta['send_to'] == 'admin' ) {
-						$email_to = get_option( 'admin_email' );
-					} elseif( $meta['send_to'] == 'custom' ) {
-						if( ! isset( $meta['custom_email'] ) || $meta['custom_email'] == '' ) {
-							$email_to = get_option( 'admin_email' );
-						} else {
-							$email_to = esc_attr( $meta['custom_email'] );
-						}
-					}
-
-					$message = edd_do_email_tags( $meta['message'], $payment_id );
-					$subject = edd_do_email_tags( $meta['subject'], $payment_id );
+					$email_to = edd_conditional_emails_get_email( $payment_id, $meta );
+					$message  = edd_do_email_tags( $meta['message'], $payment_id );
+					$subject  = edd_do_email_tags( $meta['subject'], $payment_id );
 
 					if( class_exists( 'EDD_Emails' ) ) {
 						EDD()->emails->send( $email_to, $subject, $message );
@@ -168,20 +146,9 @@ function edd_conditional_emails_purchase_amount( $payment_id ) {
 
 			if( $meta['condition'] == 'purchase-amount' ) {
 				if( $value >= (float) $meta['minimum_amount'] ){
-					if( $meta['send_to'] == 'user' ) {
-						$email_to = esc_attr( edd_get_payment_user_email( $payment_id ) );
-					} elseif( $meta['send_to'] == 'admin' ) {
-						$email_to = get_option( 'admin_email' );
-					} elseif( $meta['send_to'] == 'custom' ) {
-						if( ! isset( $meta['custom_email'] ) || $meta['custom_email'] == '' ) {
-							$email_to = get_option( 'admin_email' );
-						} else {
-							$email_to = esc_attr( $meta['custom_email'] );
-						}
-					}
-
-					$message = edd_do_email_tags( $meta['message'], $payment_id );
-					$subject = edd_do_email_tags( $meta['subject'], $payment_id );
+					$email_to = edd_conditional_emails_get_email( $payment_id, $meta );
+					$message  = edd_do_email_tags( $meta['message'], $payment_id );
+					$subject  = edd_do_email_tags( $meta['subject'], $payment_id );
 
 					if( class_exists( 'EDD_Emails' ) ) {
 						EDD()->emails->send( $email_to, $subject, $message );

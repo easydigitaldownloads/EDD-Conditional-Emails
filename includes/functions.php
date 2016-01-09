@@ -63,13 +63,13 @@ function edd_conditional_emails_get_status( $meta = array() ) {
 
 
 /**
- * Get the email for a given email
+ * Get the email type for a given email
  *
  * @since       1.0.1
  * @param       array $meta The meta data for a given email
  * @return      string $email The requested email data
  */
-function edd_conditional_emails_get_email( $meta = array() ) {
+function edd_conditional_emails_get_email_type( $meta = array() ) {
 	if( ! isset( $meta['send_to'] ) || $meta['send_to'] == '' ) {
 		$meta['send_to'] = 'user';
 	}
@@ -89,5 +89,37 @@ function edd_conditional_emails_get_email( $meta = array() ) {
 			break;
 	}
 
-	return apply_filters( 'edd_conditional_emails_get_email', $email, $meta );
+	return apply_filters( 'edd_conditional_emails_get_email_type', $email, $meta );
+}
+
+
+/**
+ * Get the email for a given email
+ *
+ * @since       1.0.4
+ * @param       int $payment_id The ID of the payment to retrieve the email for
+ * @param       array $meta The meta data for a given email
+ * @return      string $email The requested email address
+ */
+function edd_conditional_emails_get_email( $payment_id, $meta = array() ) {
+	if( ! isset( $meta['send_to'] ) || $meta['send_to'] == '' ) {
+		$meta['send_to'] = 'user';
+	}
+
+	switch( $meta['send_to'] ) {
+		case 'user' :
+			$email = esc_attr( edd_get_payment_user_email( $payment_id ) );
+			break;
+		case 'admin' :
+			$email = get_option( 'admin_email' );
+			break;
+		case 'custom' :
+			$email = ( ! isset( $meta['custom_email'] ) || $meta['custom_email'] == '' ) ? get_option( 'admin_email' ) : esc_attr( $meta['custom_email'] );
+			break;
+		default :
+			$email = get_option( 'admin_email' );
+			break;
+	}
+
+	return $email;
 }

@@ -72,7 +72,7 @@ function edd_conditional_emails_table() {
 			foreach( $emails as $key => $email ) {
 				$meta    = get_post_meta( $email->ID, '_edd_conditional_email', true );
 				$status  = edd_conditional_emails_get_status( $meta );
-				$send_to = edd_conditional_emails_get_email( $meta );
+				$send_to = edd_conditional_emails_get_email_type( $meta );
 
 				echo '<tr' . ( $i % 2 == 0 ? ' class="alternate"' : '' ) . '>';
 				echo '<td>' . esc_html( $meta['subject'] ) . '</td>';
