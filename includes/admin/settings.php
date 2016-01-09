@@ -23,16 +23,16 @@ if( ! defined( 'ABSPATH' ) ) {
 function edd_conditional_emails_settings( $settings ) {
 	$new_settings = array(
 		array(
-			'id'    => 'edd_conditional_emails_header',
-			'name'  => '<strong>' . __( 'Conditional Emails', 'edd-conditional-emails' ) . '</strong>',
-			'desc'  => '',
-			'type'  => 'header'
+			'id'   => 'edd_conditional_emails_header',
+			'name' => '<strong>' . __( 'Conditional Emails', 'edd-conditional-emails' ) . '</strong>',
+			'desc' => '',
+			'type' => 'header'
 		),
 		array(
-			'id'    => 'conditional_emails_table',
-			'name'  => __( 'Emails', 'edd-conditional-emails' ),
-			'desc'  => __( 'Configure your emails', 'edd-conditional-emails' ),
-			'type'  => 'hook'
+			'id'   => 'conditional_emails_table',
+			'name' => __( 'Emails', 'edd-conditional-emails' ),
+			'desc' => __( 'Configure your emails', 'edd-conditional-emails' ),
+			'type' => 'hook'
 		)
 	);
 
@@ -61,18 +61,18 @@ function edd_conditional_emails_table() {
 		<?php
 		$emails = get_posts(
 			array(
-				'posts_per_page'    => 99999,
-				'post_type'         => 'conditional-email',
-				'post_status'       => 'publish'
+				'posts_per_page' => 99999,
+				'post_type'      => 'conditional-email',
+				'post_status'    => 'publish'
 			)
 		);
 
 		if( ! empty( $emails ) ) {
 			$i = 1;
 			foreach( $emails as $key => $email ) {
-				$meta   = get_post_meta( $email->ID, '_edd_conditional_email', true );
-				$status = edd_conditional_emails_get_status( $meta );
-				$send_to= edd_conditional_emails_get_email( $meta );
+				$meta    = get_post_meta( $email->ID, '_edd_conditional_email', true );
+				$status  = edd_conditional_emails_get_status( $meta );
+				$send_to = edd_conditional_emails_get_email_type( $meta );
 
 				echo '<tr' . ( $i % 2 == 0 ? ' class="alternate"' : '' ) . '>';
 				echo '<td>' . esc_html( $meta['subject'] ) . '</td>';
@@ -105,8 +105,8 @@ add_action( 'edd_conditional_emails_table', 'edd_conditional_emails_table' );
  * @return      void
  */
 function edd_conditional_emails_render_edit() {
-	$action         = isset( $_GET['edd-ca-action'] ) ? sanitize_text_field( $_GET['edd-ca-action'] ) : 'add-conditional-email';
-	$email_id       = ( isset( $_GET['email'] ) ? absint( $_GET['email'] ) : false );
+	$action   = isset( $_GET['edd-ca-action'] ) ? sanitize_text_field( $_GET['edd-ca-action'] ) : 'add-conditional-email';
+	$email_id = ( isset( $_GET['email'] ) ? absint( $_GET['email'] ) : false );
 
 	// Maybe get email
 	if( $email_id ) {

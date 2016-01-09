@@ -84,6 +84,17 @@ We just wanted to drop you a quick note to thank you for being such an awesome c
 		}
 	}
 
+	// Pending payment based
+	if( $condition == 'pending-payment' ) {
+		$subject = ( ! empty( $data['subject'] ) ? sanitize_text_field( $data['subject'] ) : __( 'You have a pending purchase on {sitename}!', 'edd-conditional-emails' ) );
+
+		if( empty( $message ) ) {
+			$message = 'Hello {name},
+
+We just wanted to drop you a quick note to to let you know that you still have a pending purchase on {sitename}!';
+		}
+	}
+
 	$email_id   = ( ! empty( $data['email-id'] ) ? absint( $data['email-id'] ) : false );
 
 	if( ! $email_id ) {

@@ -19,6 +19,10 @@ jQuery(document).ready(function ($) {
             $('select[id="edd-conditional-email-status-from"]').closest('tr').css('display', 'none');
             $('select[id="edd-conditional-email-status-to"]').closest('tr').css('display', 'none');
             $('input[id="edd-conditional-email-minimum-amount"]').closest('tr').css('display', 'table-row');
+        } else if (selectedItem.val() === 'pending-payment') {
+            $('select[id="edd-conditional-email-status-from"]').closest('tr').css('display', 'none');
+            $('select[id="edd-conditional-email-status-to"]').closest('tr').css('display', 'none');
+            $('input[id="edd-conditional-email-minimum-amount"]').closest('tr').css('display', 'none');
         }
     }).change();
 

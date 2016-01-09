@@ -3,7 +3,7 @@
  * Plugin Name:     Easy Digital Downloads - Conditional Emails
  * Plugin URI:      https://easydigitaldownloads.com/extensions/conditional-emails
  * Description:     Send notification emails based on conditional events
- * Version:         1.0.3
+ * Version:         1.0.4
  * Author:          Daniel J Griffiths
  * Author URI:      http://section214.com
  * Text Domain:     edd-conditional-emails
@@ -67,7 +67,7 @@ if( ! class_exists( 'EDD_Conditional_Emails' ) ) {
 		 */
 		private function setup_constants() {
 			// Plugin version
-			define( 'EDD_CONDITIONAL_EMAILS_VER', '1.0.3' );
+			define( 'EDD_CONDITIONAL_EMAILS_VER', '1.0.4' );
 
 			// Plugin path
 			define( 'EDD_CONDITIONAL_EMAILS_DIR', plugin_dir_path( __FILE__ ) );
@@ -130,8 +130,8 @@ if( ! class_exists( 'EDD_Conditional_Emails' ) ) {
 			$mofile = sprintf( '%1$s-%2$s.mo', 'edd-conditional-emails', $locale );
 
 			// Setup paths to current locale file
-			$mofile_local   = $lang_dir . $mofile;
-			$mofile_global  = WP_LANG_DIR . '/edd-conditional-emails/' . $mofile;
+			$mofile_local  = $lang_dir . $mofile;
+			$mofile_global = WP_LANG_DIR . '/edd-conditional-emails/' . $mofile;
 
 			if( file_exists( $mofile_global ) ) {
 				// Look in global /wp-content/languages/edd-conditional-emails/ folder
