@@ -130,8 +130,8 @@ if( ! class_exists( 'EDD_Conditional_Emails' ) ) {
 			$mofile = sprintf( '%1$s-%2$s.mo', 'edd-conditional-emails', $locale );
 
 			// Setup paths to current locale file
-			$mofile_local   = $lang_dir . $mofile;
-			$mofile_global  = WP_LANG_DIR . '/edd-conditional-emails/' . $mofile;
+			$mofile_local  = $lang_dir . $mofile;
+			$mofile_global = WP_LANG_DIR . '/edd-conditional-emails/' . $mofile;
 
 			if( file_exists( $mofile_global ) ) {
 				// Look in global /wp-content/languages/edd-conditional-emails/ folder
