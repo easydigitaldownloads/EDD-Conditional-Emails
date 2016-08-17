@@ -120,7 +120,7 @@ We just wanted to drop you a quick note to to let you know that you still have a
 
 	update_post_meta( $email_id, '_edd_conditional_email', $meta );
 
-	wp_safe_redirect( esc_url_raw( admin_url( 'edit.php?post_type=download&page=edd-settings&tab=emails#edd-conditional-emails-table' ) ) );
+	wp_safe_redirect( esc_url_raw( admin_url( 'edit.php?post_type=download&page=edd-settings&tab=emails&section=conditional-emails' ) ) );
 	exit;
 }
 add_action( 'edd_edit_conditional_email', 'edd_edit_conditional_email' );
@@ -148,7 +148,7 @@ function edd_delete_conditional_email( $data ) {
 
 	wp_delete_post( $data['email'] );
 
-	wp_safe_redirect( esc_url_raw( admin_url( 'edit.php?post_type=download&page=edd-settings&tab=emails#edd-conditional-emails-table' ) ) );
+	wp_safe_redirect( esc_url_raw( admin_url( 'edit.php?post_type=download&page=edd-settings&tab=emails&section=conditional-emails' ) ) );
 	exit;
 }
 add_action( 'edd_delete_conditional_email', 'edd_delete_conditional_email' );

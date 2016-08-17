@@ -14,6 +14,21 @@ if( ! defined( 'ABSPATH' ) ) {
 
 
 /**
+ * Add settings section
+ *
+ * @since       1.0.1
+ * @param       array $sections The existing extensions sections
+ * @return      array The modified extensions settings
+ */
+function edd_conditional_emails_add_settings_section( $sections ) {
+	$sections['conditional-emails'] = __( 'Conditional Emails', 'edd-conditional-emails' );
+
+	return $sections;
+}
+add_filter( 'edd_settings_sections_emails', 'edd_conditional_emails_add_settings_section' );
+
+
+/**
  * Register new settings in Emails
  *
  * @since       1.0.0
@@ -22,18 +37,20 @@ if( ! defined( 'ABSPATH' ) ) {
  */
 function edd_conditional_emails_settings( $settings ) {
 	$new_settings = array(
-		array(
-			'id'   => 'edd_conditional_emails_header',
-			'name' => '<strong>' . __( 'Conditional Emails', 'edd-conditional-emails' ) . '</strong>',
-			'desc' => '',
-			'type' => 'header'
-		),
-		array(
-			'id'   => 'conditional_emails_table',
-			'name' => __( 'Emails', 'edd-conditional-emails' ),
-			'desc' => __( 'Configure your emails', 'edd-conditional-emails' ),
-			'type' => 'hook'
-		)
+		'conditional-emails' => apply_filters( 'edd_conditional_emails_settings', array(
+			array(
+				'id'   => 'edd_conditional_emails_header',
+				'name' => '<strong>' . __( 'Conditional Emails', 'edd-conditional-emails' ) . '</strong>',
+				'desc' => '',
+				'type' => 'header'
+			),
+			array(
+				'id'   => 'conditional_emails_table',
+				'name' => __( 'Emails', 'edd-conditional-emails' ),
+				'desc' => __( 'Configure your emails', 'edd-conditional-emails' ),
+				'type' => 'hook'
+			)
+		) )
 	);
 
 	return array_merge( $settings, $new_settings );
