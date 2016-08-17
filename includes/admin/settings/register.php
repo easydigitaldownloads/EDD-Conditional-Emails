@@ -2,7 +2,7 @@
 /**
  * Settings
  *
- * @package     EDD\ConditionalEmails\Settings
+ * @package     EDD\ConditionalEmails\Admin\Settings
  * @since       1.0.0
  */
 
@@ -14,6 +14,21 @@ if( ! defined( 'ABSPATH' ) ) {
 
 
 /**
+ * Add settings section
+ *
+ * @since       1.0.1
+ * @param       array $sections The existing extensions sections
+ * @return      array The modified extensions settings
+ */
+function edd_conditional_emails_add_settings_section( $sections ) {
+	$sections['conditional-emails'] = __( 'Conditional Emails', 'edd-conditional-emails' );
+
+	return $sections;
+}
+add_filter( 'edd_settings_sections_emails', 'edd_conditional_emails_add_settings_section' );
+
+
+/**
  * Register new settings in Emails
  *
  * @since       1.0.0
@@ -22,18 +37,20 @@ if( ! defined( 'ABSPATH' ) ) {
  */
 function edd_conditional_emails_settings( $settings ) {
 	$new_settings = array(
-		array(
-			'id'   => 'edd_conditional_emails_header',
-			'name' => '<strong>' . __( 'Conditional Emails', 'edd-conditional-emails' ) . '</strong>',
-			'desc' => '',
-			'type' => 'header'
-		),
-		array(
-			'id'   => 'conditional_emails_table',
-			'name' => __( 'Emails', 'edd-conditional-emails' ),
-			'desc' => __( 'Configure your emails', 'edd-conditional-emails' ),
-			'type' => 'hook'
-		)
+		'conditional-emails' => apply_filters( 'edd_conditional_emails_settings', array(
+			array(
+				'id'   => 'edd_conditional_emails_header',
+				'name' => '<strong>' . __( 'Conditional Emails', 'edd-conditional-emails' ) . '</strong>',
+				'desc' => '',
+				'type' => 'header'
+			),
+			array(
+				'id'   => 'conditional_emails_table',
+				'name' => __( 'Emails', 'edd-conditional-emails' ),
+				'desc' => __( 'Configure your emails', 'edd-conditional-emails' ),
+				'type' => 'hook'
+			)
+		) )
 	);
 
 	return array_merge( $settings, $new_settings );
@@ -128,7 +145,7 @@ function edd_conditional_emails_render_edit() {
 	$meta = array_merge( $defaults, $meta );
 	?>
 	<div class="wrap">
-		<h2><?php ( $action == 'edit-conditional-email' ? _e( 'Edit Email', 'edd-conditional-emails' ) : _e( 'Add Email', 'edd-conditional-emails' ) ); ?> <a href="<?php echo esc_url( admin_url( 'edit.php?post_type=download&page=edd-settings&tab=emails' ) ); ?>" class="add-new-h2"><?php _e( 'Go Back', 'edd' ); ?></a></h2>
+		<h2><?php ( $action == 'edit-conditional-email' ? _e( 'Edit Email', 'edd-conditional-emails' ) : _e( 'Add Email', 'edd-conditional-emails' ) ); ?> <a href="<?php echo esc_url( admin_url( 'edit.php?post_type=download&page=edd-settings&tab=emails&section=conditional-emails' ) ); ?>" class="add-new-h2"><?php _e( 'Go Back', 'edd' ); ?></a></h2>
 
 		<form id="edd-edit-conditional-email" action="" method="post">
 			<table class="form-table">
@@ -222,7 +239,7 @@ function edd_conditional_emails_render_edit() {
 						<td>
 							<?php wp_editor( wp_kses_post( wptexturize( $meta['message'] ) ), 'message', array( 'textarea_name' => 'message' ) ); ?>
 							<p class="description"><?php _e( 'The email message to be sent. HTML is accepted. Available template tags:', 'edd-conditional-emails' ); ?></p>
-							<p class="edd-conditional-email-tags-list"><?php echo edd_get_emails_tags_list(); ?></p>
+							<p class="edd-conditional-email-tags-list"><?php echo edd_conditional_emails_get_template_tags(); ?></p>
 						</td>
 					</tr>
 				</tbody>

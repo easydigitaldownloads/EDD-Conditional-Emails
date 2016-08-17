@@ -27,6 +27,10 @@ function edd_conditional_emails_conditions() {
 		'pending-payment' => __( 'Pending Payment', 'edd-conditional-emails' )
 	);
 
+	if( class_exists( 'EDD_Software_Licensing' ) ) {
+		$conditions['license-upgrade'] = __( 'License Upgrade', 'edd-conditional-emails' );
+	}
+
 	return apply_filters( 'edd_conditional_emails_conditions', $conditions );
 }
 
@@ -52,6 +56,9 @@ function edd_conditional_emails_get_status( $meta = array() ) {
 			break;
 		case 'pending-payment' :
 			$status = __( 'Pending payment', 'edd-conditional-emails' );
+			break;
+		case 'license-upgrade' :
+			$status = __( 'License Upgrade', 'edd-conditional-emails' );
 			break;
 		default :
 			$status = __( 'Condition unknown', 'edd-conditional-emails' );
@@ -122,4 +129,47 @@ function edd_conditional_emails_get_email( $payment_id, $meta = array() ) {
 	}
 
 	return $email;
+}
+
+
+/**
+ * Get a list of available template tags
+ *
+ * @since       1.0.0
+ * @return      string $tags The available template tags
+ */
+function edd_conditional_emails_get_template_tags() {
+	$tags  = '<p class="edd-conditional-email-tags-list">';
+	$tags .= '<span class="show-on-purchase-status show-on-purchase-amount">{download_list} - ' . __( 'A list of download links for each download purchased', 'edd-conditional-emails' ) . '<br></span>';
+	$tags .= '<span class="show-on-purchase-status show-on-purchase-amount">{file_urls} - ' . __( 'A plain-text list of download URLs for each download purchased', 'edd-conditional-emails' ) . '<br></span>';
+	$tags .= '{name} - ' . __( 'The buyer\'s first name', 'edd-conditional-emails' ) . '<br>';
+	$tags .= '{fullname} - ' . __( 'The buyer\'s full name, first and last', 'edd-conditional-emails' ) . '<br>';
+	$tags .= '{username} - ' . __( 'The buyer\'s user name on the site, if they registered an account', 'edd-conditional-emails' ) . '<br>';
+	$tags .= '{user_email} - ' . __( 'The buyer\'s email address', 'edd-conditional-emails' ) . '<br>';
+	$tags .= '{billing_address} - ' . __( 'The buyer\'s billing address', 'edd-conditional-emails' ) . '<br>';
+	$tags .= '{date} - ' . __( 'The date of the purchase', 'edd-conditional-emails' ) . '<br>';
+	$tags .= '<span class="show-on-purchase-status show-on-purchase-amount show-on-license-upgrade">{subtotal} - ' . __( 'The price of the purchase before taxes', 'edd-conditional-emails' ) . '<br></span>';
+	$tags .= '<span class="show-on-purchase-status show-on-purchase-amount show-on-license-upgrade">{tax} - ' . __( 'The taxed amount of the purchase', 'edd-conditional-emails' ) . '<br></span>';
+	$tags .= '<span class="show-on-purchase-status show-on-purchase-amount show-on-license-upgrade">{price} - ' . __( 'The total price of the purchase', 'edd-conditional-emails' ) . '<br></span>';
+	$tags .= '<span class="show-on-purchase-status show-on-purchase-amount show-on-license-upgrade">{payment_id} - ' . __( 'The unique ID number for this purchase', 'edd-conditional-emails' ) . '<br></span>';
+	$tags .= '<span class="show-on-purchase-status show-on-purchase-amount show-on-license-upgrade">{receipt_id} - ' . __( 'The unique ID number for this purchase receipt', 'edd-conditional-emails' ) . '<br></span>';
+	$tags .= '<span class="show-on-purchase-status show-on-purchase-amount show-on-license-upgrade">{payment_method} - ' . __( 'The method of payment used for this purchase', 'edd-conditional-emails' ) . '<br></span>';
+	$tags .= '{sitename} - ' . __( 'Your site name', 'edd-conditional-emails' ) . '<br>';
+	$tags .= '<span class="show-on-purchase-status show-on-purchase-amount show-on-license-upgrade">{receipt_link} - ' . __( 'Adds a link so users can view their receipt directly on your website if they are unable to view it in the browser correctly.', 'edd-conditional-emails' ) . '<br></span>';
+	$tags .= '<span class="show-on-purchase-status show-on-purchase-amount">{discount_codes} - ' . __( 'Adds a list of any discount codes applied to this purchase', 'edd-conditional-emails' ) . '<br></span>';
+	$tags .= '{ip_address} - ' . __( 'The buyer\'s IP Address', 'edd-conditional-emails' ) . '<br>';
+
+	if( class_exists( 'EDD_Software_Licensing' ) ) {
+		$tags .= '<span class="show-on-purchase-status show-on-purchase-amount">{license_keys} - ' . __( 'Show all purchased licenses', 'edd-conditional-emails' ) . '<br></span>';
+		$tags .= '<span class="show-on-license-upgrade">{license_key} - ' . __( 'Show the license key for this upgrade', 'edd-conditional-emails' ) . '<br></span>';
+		$tags .= '<span class="show-on-license-upgrade">{license_product} - ' . __( 'Show the product for this upgrade', 'edd-conditional-emails' ) . '<br></span>';
+	}
+
+	if( class_exists( 'CFM_Emails' ) ) {
+		$tags .= '<br>' . __( 'CFM fields can be added by entering their meta key name as an email tag.', 'edd-conditional-emails' );
+	}
+
+	$tags .= '</p>';
+
+	return $tags;
 }

@@ -95,14 +95,25 @@ We just wanted to drop you a quick note to to let you know that you still have a
 		}
 	}
 
+	// License upgrade based
+	if( $condition == 'license-upgrade' ) {
+		$subject = ( ! empty( $data['subject'] ) ? sanitize_text_field( $data['subject'] ) : __( 'Thanks for upgrading!', 'edd-conditional-emails' ) );
+
+		if( empty( $message ) ) {
+			$message = 'Hello {name},
+
+We just wanted to drop you a quick note to thank you for upgrading your purchase from {sitename}!';
+		}
+	}
+
 	$email_id   = ( ! empty( $data['email-id'] ) ? absint( $data['email-id'] ) : false );
 
 	if( ! $email_id ) {
 		$email_id = wp_insert_post(
 			array(
-				'post_title'    => $subject,
-				'post_type'     => 'conditional-email',
-				'post_status'   => 'publish'
+				'post_title'  => $subject,
+				'post_type'   => 'conditional-email',
+				'post_status' => 'publish'
 			)
 		);
 	}
@@ -120,7 +131,7 @@ We just wanted to drop you a quick note to to let you know that you still have a
 
 	update_post_meta( $email_id, '_edd_conditional_email', $meta );
 
-	wp_safe_redirect( esc_url_raw( admin_url( 'edit.php?post_type=download&page=edd-settings&tab=emails#edd-conditional-emails-table' ) ) );
+	wp_safe_redirect( esc_url_raw( admin_url( 'edit.php?post_type=download&page=edd-settings&tab=emails&section=conditional-emails' ) ) );
 	exit;
 }
 add_action( 'edd_edit_conditional_email', 'edd_edit_conditional_email' );
@@ -148,7 +159,7 @@ function edd_delete_conditional_email( $data ) {
 
 	wp_delete_post( $data['email'] );
 
-	wp_safe_redirect( esc_url_raw( admin_url( 'edit.php?post_type=download&page=edd-settings&tab=emails#edd-conditional-emails-table' ) ) );
+	wp_safe_redirect( esc_url_raw( admin_url( 'edit.php?post_type=download&page=edd-settings&tab=emails&section=conditional-emails' ) ) );
 	exit;
 }
 add_action( 'edd_delete_conditional_email', 'edd_delete_conditional_email' );
