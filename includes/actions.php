@@ -62,6 +62,14 @@ function edd_conditional_emails_pending_payment_email( $email_id, $payment_id ) 
 		$message  = edd_do_email_tags( $meta['message'], $payment_id );
 		$subject  = edd_do_email_tags( $meta['subject'], $payment_id );
 
+		if( class_exists( 'CFM_Emails' ) ) {
+			$form_id = get_option( 'cfm-checkout-form', false );
+
+			if ( $form_id ){
+				$message = EDD_CFM()->emails->custom_meta_values( $message, $payment_id );
+			}
+		}
+
 		if( class_exists( 'EDD_Emails' ) ) {
 			EDD()->emails->send( $email_to, $subject, $message );
 		} else {
@@ -104,6 +112,14 @@ function edd_conditional_emails_status_change_email( $payment_id, $new_status, $
 					$email_to = edd_conditional_emails_get_email( $payment_id, $meta );
 					$message  = edd_do_email_tags( $meta['message'], $payment_id );
 					$subject  = edd_do_email_tags( $meta['subject'], $payment_id );
+
+					if( class_exists( 'CFM_Emails' ) ) {
+						$form_id = get_option( 'cfm-checkout-form', false );
+
+						if ( $form_id ){
+							$message = EDD_CFM()->emails->custom_meta_values( $message, $payment_id );
+						}
+					}
 
 					if( class_exists( 'EDD_Emails' ) ) {
 						EDD()->emails->send( $email_to, $subject, $message );
@@ -149,6 +165,14 @@ function edd_conditional_emails_purchase_amount( $payment_id ) {
 					$email_to = edd_conditional_emails_get_email( $payment_id, $meta );
 					$message  = edd_do_email_tags( $meta['message'], $payment_id );
 					$subject  = edd_do_email_tags( $meta['subject'], $payment_id );
+
+					if( class_exists( 'CFM_Emails' ) ) {
+						$form_id = get_option( 'cfm-checkout-form', false );
+
+						if ( $form_id ){
+							$message = EDD_CFM()->emails->custom_meta_values( $message, $payment_id );
+						}
+					}
 
 					if( class_exists( 'EDD_Emails' ) ) {
 						EDD()->emails->send( $email_to, $subject, $message );
