@@ -67,6 +67,18 @@ jQuery(document).ready(function ($) {
                     $(this).css('display', 'none');
                 }
             });
+        } else if (selectedItem.val() === 'license-renewal') {
+            $('select[id="edd-conditional-email-status-from"]').closest('tr').css('display', 'none');
+            $('select[id="edd-conditional-email-status-to"]').closest('tr').css('display', 'none');
+            $('input[id="edd-conditional-email-minimum-amount"]').closest('tr').css('display', 'none');
+
+            $('.edd-conditional-email-tags-list span').each(function() {
+                if($(this).hasClass('show-on-license-renewal')) {
+                    $(this).css('display', 'block');
+                } else {
+                    $(this).css('display', 'none');
+                }
+            });
         }
     }).change();
 
