@@ -27,6 +27,10 @@ function edd_conditional_emails_conditions() {
 		'pending-payment' => __( 'Pending Payment', 'edd-conditional-emails' )
 	);
 
+	if( class_exists( 'EDD_Software_Licensing' ) ) {
+		$conditions['license-upgrade'] = __( 'License Upgrade', 'edd-conditional-emails' );
+	}
+
 	return apply_filters( 'edd_conditional_emails_conditions', $conditions );
 }
 
@@ -52,6 +56,9 @@ function edd_conditional_emails_get_status( $meta = array() ) {
 			break;
 		case 'pending-payment' :
 			$status = __( 'Pending payment', 'edd-conditional-emails' );
+			break;
+		case 'license-upgrade' :
+			$status = __( 'License Upgrade', 'edd-conditional-emails' );
 			break;
 		default :
 			$status = __( 'Condition unknown', 'edd-conditional-emails' );

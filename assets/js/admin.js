@@ -23,6 +23,10 @@ jQuery(document).ready(function ($) {
             $('select[id="edd-conditional-email-status-from"]').closest('tr').css('display', 'none');
             $('select[id="edd-conditional-email-status-to"]').closest('tr').css('display', 'none');
             $('input[id="edd-conditional-email-minimum-amount"]').closest('tr').css('display', 'none');
+        } else if (selectedItem.val() === 'license-upgrade') {
+            $('select[id="edd-conditional-email-status-from"]').closest('tr').css('display', 'none');
+            $('select[id="edd-conditional-email-status-to"]').closest('tr').css('display', 'none');
+            $('input[id="edd-conditional-email-minimum-amount"]').closest('tr').css('display', 'none');
         }
     }).change();
 

@@ -95,6 +95,17 @@ We just wanted to drop you a quick note to to let you know that you still have a
 		}
 	}
 
+	// License upgrade based
+	if( $condition == 'license-upgrade' ) {
+		$subject = ( ! empty( $data['subject'] ) ? sanitize_text_field( $data['subject'] ) : __( 'Thanks for upgrading!', 'edd-conditional-emails' ) );
+
+		if( empty( $message ) ) {
+			$message = 'Hello {name},
+
+We just wanted to drop you a quick note to thank you for upgrading your purchase from {sitename}!';
+		}
+	}
+
 	$email_id   = ( ! empty( $data['email-id'] ) ? absint( $data['email-id'] ) : false );
 
 	if( ! $email_id ) {
