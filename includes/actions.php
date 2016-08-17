@@ -65,10 +65,10 @@ function edd_conditional_emails_pending_payment_email( $email_id, $payment_id ) 
 		if( class_exists( 'EDD_Emails' ) ) {
 			EDD()->emails->send( $email_to, $subject, $message );
 		} else {
-			$from_name   = get_bloginfo( 'name' );
-			$from_email  = get_bloginfo( 'admin_email' );
-			$headers     = 'From: ' . stripslashes_deep( html_entity_decode( $from_name, ENT_COMPAT, 'UTF-8' ) ) . " <$from_email>\r\n";
-			$headers    .= 'Reply-To: ' . $from_email . "\r\n";
+			$from_name  = get_bloginfo( 'name' );
+			$from_email = get_bloginfo( 'admin_email' );
+			$headers    = 'From: ' . stripslashes_deep( html_entity_decode( $from_name, ENT_COMPAT, 'UTF-8' ) ) . " <$from_email>\r\n";
+			$headers   .= 'Reply-To: ' . $from_email . "\r\n";
 
 			wp_mail( $email_to, $subject, $message, $headers );
 		}
@@ -108,10 +108,10 @@ function edd_conditional_emails_status_change_email( $payment_id, $new_status, $
 					if( class_exists( 'EDD_Emails' ) ) {
 						EDD()->emails->send( $email_to, $subject, $message );
 					} else {
-						$from_name   = get_bloginfo( 'name' );
-						$from_email  = get_bloginfo( 'admin_email' );
-						$headers     = 'From: ' . stripslashes_deep( html_entity_decode( $from_name, ENT_COMPAT, 'UTF-8' ) ) . " <$from_email>\r\n";
-						$headers    .= 'Reply-To: ' . $from_email . "\r\n";
+						$from_name  = get_bloginfo( 'name' );
+						$from_email = get_bloginfo( 'admin_email' );
+						$headers    = 'From: ' . stripslashes_deep( html_entity_decode( $from_name, ENT_COMPAT, 'UTF-8' ) ) . " <$from_email>\r\n";
+						$headers   .= 'Reply-To: ' . $from_email . "\r\n";
 
 						wp_mail( $email_to, $subject, $message, $headers );
 					}
@@ -153,10 +153,10 @@ function edd_conditional_emails_purchase_amount( $payment_id ) {
 					if( class_exists( 'EDD_Emails' ) ) {
 						EDD()->emails->send( $email_to, $subject, $message );
 					} else {
-						$from_name   = get_bloginfo( 'name' );
-						$from_email  = get_bloginfo( 'admin_email' );
-						$headers     = 'From: ' . stripslashes_deep( html_entity_decode( $from_name, ENT_COMPAT, 'UTF-8' ) ) . " <$from_email>\r\n";
-						$headers    .= 'Reply-To: ' . $from_email . "\r\n";
+						$from_name  = get_bloginfo( 'name' );
+						$from_email = get_bloginfo( 'admin_email' );
+						$headers    = 'From: ' . stripslashes_deep( html_entity_decode( $from_name, ENT_COMPAT, 'UTF-8' ) ) . " <$from_email>\r\n";
+						$headers   .= 'Reply-To: ' . $from_email . "\r\n";
 
 						wp_mail( $email_to, $subject, $message, $headers );
 					}

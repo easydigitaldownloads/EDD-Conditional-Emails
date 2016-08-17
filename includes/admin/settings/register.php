@@ -2,7 +2,7 @@
 /**
  * Settings
  *
- * @package     EDD\ConditionalEmails\Settings
+ * @package     EDD\ConditionalEmails\Admin\Settings
  * @since       1.0.0
  */
 

@@ -91,8 +91,8 @@ if( ! class_exists( 'EDD_Conditional_Emails' ) ) {
 			require_once EDD_CONDITIONAL_EMAILS_DIR . 'includes/post-types.php';
 
 			if( is_admin() ) {
+				require_once EDD_CONDITIONAL_EMAILS_DIR . 'includes/admin/settings/register.php';
 				require_once EDD_CONDITIONAL_EMAILS_DIR . 'includes/admin/actions.php';
-				require_once EDD_CONDITIONAL_EMAILS_DIR . 'includes/admin/settings.php';
 				require_once EDD_CONDITIONAL_EMAILS_DIR . 'includes/admin/pages.php';
 			}
 		}

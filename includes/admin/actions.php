@@ -100,9 +100,9 @@ We just wanted to drop you a quick note to to let you know that you still have a
 	if( ! $email_id ) {
 		$email_id = wp_insert_post(
 			array(
-				'post_title'    => $subject,
-				'post_type'     => 'conditional-email',
-				'post_status'   => 'publish'
+				'post_title'  => $subject,
+				'post_type'   => 'conditional-email',
+				'post_status' => 'publish'
 			)
 		);
 	}
