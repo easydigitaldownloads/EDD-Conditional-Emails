@@ -145,7 +145,7 @@ function edd_conditional_emails_render_edit() {
 	$meta = array_merge( $defaults, $meta );
 	?>
 	<div class="wrap">
-		<h2><?php ( $action == 'edit-conditional-email' ? _e( 'Edit Email', 'edd-conditional-emails' ) : _e( 'Add Email', 'edd-conditional-emails' ) ); ?> <a href="<?php echo esc_url( admin_url( 'edit.php?post_type=download&page=edd-settings&tab=emails' ) ); ?>" class="add-new-h2"><?php _e( 'Go Back', 'edd' ); ?></a></h2>
+		<h2><?php ( $action == 'edit-conditional-email' ? _e( 'Edit Email', 'edd-conditional-emails' ) : _e( 'Add Email', 'edd-conditional-emails' ) ); ?> <a href="<?php echo esc_url( admin_url( 'edit.php?post_type=download&page=edd-settings&tab=emails&section=conditional-emails' ) ); ?>" class="add-new-h2"><?php _e( 'Go Back', 'edd' ); ?></a></h2>
 
 		<form id="edd-edit-conditional-email" action="" method="post">
 			<table class="form-table">
