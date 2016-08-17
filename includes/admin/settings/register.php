@@ -239,7 +239,7 @@ function edd_conditional_emails_render_edit() {
 						<td>
 							<?php wp_editor( wp_kses_post( wptexturize( $meta['message'] ) ), 'message', array( 'textarea_name' => 'message' ) ); ?>
 							<p class="description"><?php _e( 'The email message to be sent. HTML is accepted. Available template tags:', 'edd-conditional-emails' ); ?></p>
-							<p class="edd-conditional-email-tags-list"><?php echo edd_get_emails_tags_list(); ?></p>
+							<p class="edd-conditional-email-tags-list"><?php echo edd_conditional_emails_get_template_tags(); ?></p>
 						</td>
 					</tr>
 				</tbody>
