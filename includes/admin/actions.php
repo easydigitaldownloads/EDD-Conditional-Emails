@@ -106,6 +106,17 @@ We just wanted to drop you a quick note to thank you for upgrading your purchase
 		}
 	}
 
+	// License renewal based
+	if( $condition == 'license-renewal' ) {
+		$subject = ( ! empty( $data['subject'] ) ? sanitize_text_field( $data['subject'] ) : __( 'Thanks for renewing!', 'edd-conditional-emails' ) );
+
+		if( empty( $message ) ) {
+			$message = 'Hello {name},
+
+We just wanted to drop you a quick note to thank you for renewing your purchase from {sitename}!';
+		}
+	}
+
 	$email_id   = ( ! empty( $data['email-id'] ) ? absint( $data['email-id'] ) : false );
 
 	if( ! $email_id ) {
