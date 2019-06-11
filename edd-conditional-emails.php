@@ -4,13 +4,12 @@
  * Plugin URI:      https://easydigitaldownloads.com/extensions/conditional-emails
  * Description:     Send notification emails based on conditional events
  * Version:         1.1.1
- * Author:          Daniel J Griffiths
- * Author URI:      http://section214.com
+ * Author:          Sandhills Development, LLC
+ * Author URI:      https://easydigitaldownloads.com
  * Text Domain:     edd-conditional-emails
  *
  * @package         EDD\ConditionalEmails
- * @author          Daniel J Griffiths <dgriffiths@section214.com>
- * @copyright       Copyright (c) 2014, Daniel J Griffiths
+ * @copyright       Copyright (c) 2019, Sandhills Development, LLC
  */
 
 
