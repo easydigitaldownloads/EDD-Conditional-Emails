@@ -34,6 +34,7 @@ function edd_edit_conditional_email( $data ) {
 	$status_from    = isset( $data['status_from'] ) ? esc_attr( $data['status_from'] ) : false;
 	$status_to      = isset( $data['status_to'] ) ? esc_attr( $data['status_to'] ) : false;
 	$minimum_amount = isset( $data['minimum_amount'] ) ? esc_attr( $data['minimum_amount'] ) : '';
+	$header         = isset( $data['header'] ) ? esc_attr( $data['header'] ) : '';
 	$send_to        = isset( $data['send_to'] ) ? esc_attr( $data['send_to'] ) : 'user';
 	$custom_email   = isset( $data['custom_email'] ) ? esc_attr( $data['custom_email'] ) : false;
 
@@ -137,6 +138,7 @@ We just wanted to drop you a quick note to thank you for renewing your purchase 
 		'send_to'        => $send_to,
 		'custom_email'   => $custom_email,
 		'subject'        => $subject,
+		'header'         => $header,
 		'message'        => $message
 	);
 

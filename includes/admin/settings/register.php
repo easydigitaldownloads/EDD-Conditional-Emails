@@ -140,6 +140,7 @@ function edd_conditional_emails_render_edit() {
 		'send_to'        => 'user',
 		'custom_email'   => '',
 		'subject'        => '',
+		'header'        => '',
 		'message'        => ''
 	);
 	$meta = array_merge( $defaults, $meta );
@@ -230,6 +231,15 @@ function edd_conditional_emails_render_edit() {
 						<td>
 							<input name="subject" id="edd-conditional-email-subject" type="text" value="<?php echo esc_attr( stripslashes( $meta['subject'] ) ); ?>" style="width: 300px;" />
 							<p class="description"><?php _e( 'The subject of this email.', 'edd-conditional-emails' ); ?></p>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row" valign="top">
+							<label for="edd-conditional-email-header"><?php _e( 'Email Header', 'edd-conditional-emails' ); ?></label>
+						</th>
+						<td>
+							<input name="header" id="edd-conditional-email-header" type="text" value="<?php echo esc_attr( stripslashes( $meta['header'] ) ); ?>" style="width: 300px;" />
+							<p class="description"><?php _e( 'The header of this email.', 'edd-conditional-emails' ); ?></p>
 						</td>
 					</tr>
 					<tr>
