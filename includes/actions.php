@@ -53,7 +53,7 @@ add_action( 'edd_insert_payment', 'edd_conditional_emails_setup_pending_payment_
  * @return      void
  */
 function edd_conditional_emails_pending_payment_email( $email_id, $payment_id ) {
-	$payment_status = get_post( $payment_id )->post_status;
+	$payment_status = edd_get_payment_status( $payment_id );
 
 	if( $payment_status == 'pending' ) {
 		$meta = get_post_meta( $email_id, '_edd_conditional_email', true );
