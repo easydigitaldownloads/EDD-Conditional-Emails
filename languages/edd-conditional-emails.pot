@@ -1,0 +1,401 @@
+# Copyright (C) 2021 Sandhills Development, LLC
+# This file is distributed under the same license as the Easy Digital Downloads - Conditional Emails plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: Easy Digital Downloads - Conditional Emails 1.1.2\n"
+"Report-Msgid-Bugs-To: https://easydigitaldownloads.com/support\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2021-07-12T10:54:41+01:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.5.0\n"
+"X-Domain: edd-conditional-emails\n"
+
+#. Plugin Name of the plugin
+msgid "Easy Digital Downloads - Conditional Emails"
+msgstr ""
+
+#. Plugin URI of the plugin
+msgid "https://easydigitaldownloads.com/downloads/conditional-emails"
+msgstr ""
+
+#. Description of the plugin
+msgid "Send notification emails based on conditional events"
+msgstr ""
+
+#. Author of the plugin
+msgid "Sandhills Development, LLC"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://sandhillsdev.com"
+msgstr ""
+
+#: includes/admin/actions.php:25
+msgid "You do not have permission to add conditional emails"
+msgstr ""
+
+#: includes/admin/actions.php:25
+#: includes/admin/actions.php:29
+#: includes/admin/actions.php:162
+#: includes/admin/actions.php:166
+#: includes/admin/actions.php:170
+msgid "Error"
+msgstr ""
+
+#: includes/admin/actions.php:29
+#: includes/admin/actions.php:166
+msgid "Nonce verification failed"
+msgstr ""
+
+#: includes/admin/actions.php:44
+msgid "The status of your purchase has changed"
+msgstr ""
+
+#: includes/admin/actions.php:55
+msgid "Oops! You abandoned your purchase on {sitename}"
+msgstr ""
+
+#: includes/admin/actions.php:63
+msgid "A purchase has been abandoned on {sitename}"
+msgstr ""
+
+#: includes/admin/actions.php:72
+msgid "\"Status From\" and \"Status To\" cannot be set to the same value!"
+msgstr ""
+
+#: includes/admin/actions.php:79
+msgid "Thanks for purchasing more than {price} on {sitename}!"
+msgstr ""
+
+#: includes/admin/actions.php:90
+msgid "You have a pending purchase on {sitename}!"
+msgstr ""
+
+#: includes/admin/actions.php:101
+msgid "Thanks for upgrading!"
+msgstr ""
+
+#: includes/admin/actions.php:112
+msgid "Thanks for renewing!"
+msgstr ""
+
+#: includes/admin/actions.php:162
+msgid "You do not have permission to delete conditional emails"
+msgstr ""
+
+#: includes/admin/actions.php:170
+msgid "No email ID provided"
+msgstr ""
+
+#: includes/admin/pages.php:23
+msgid "Conditional Email"
+msgstr ""
+
+#: includes/admin/settings/register.php:24
+#: includes/admin/settings/register.php:43
+#: includes/post-types.php:35
+msgid "Conditional Emails"
+msgstr ""
+
+#: includes/admin/settings/register.php:49
+msgid "Emails"
+msgstr ""
+
+#: includes/admin/settings/register.php:50
+msgid "Configure your emails"
+msgstr ""
+
+#: includes/admin/settings/register.php:72
+msgid "Subject"
+msgstr ""
+
+#: includes/admin/settings/register.php:73
+msgid "Condition"
+msgstr ""
+
+#: includes/admin/settings/register.php:74
+#: includes/admin/settings/register.php:208
+msgid "Send To"
+msgstr ""
+
+#: includes/admin/settings/register.php:75
+msgid "Actions"
+msgstr ""
+
+#: includes/admin/settings/register.php:99
+msgid "Edit"
+msgstr ""
+
+#: includes/admin/settings/register.php:100
+msgid "Delete"
+msgstr ""
+
+#: includes/admin/settings/register.php:110
+#: includes/admin/settings/register.php:149
+#: includes/admin/settings/register.php:261
+msgid "Add Email"
+msgstr ""
+
+#: includes/admin/settings/register.php:149
+#: includes/admin/settings/register.php:261
+#: includes/post-types.php:28
+msgid "Edit Email"
+msgstr ""
+
+#: includes/admin/settings/register.php:156
+msgid "Email Condition"
+msgstr ""
+
+#: includes/admin/settings/register.php:166
+msgid "On what condition should this email be sent?"
+msgstr ""
+
+#: includes/admin/settings/register.php:171
+msgid "Status - Changed From"
+msgstr ""
+
+#: includes/admin/settings/register.php:185
+msgid "Status - Changed To"
+msgstr ""
+
+#: includes/admin/settings/register.php:199
+msgid "Minimum Purchase Amount"
+msgstr ""
+
+#: includes/admin/settings/register.php:203
+msgid "The minimum amount that will trigger this email."
+msgstr ""
+
+#: includes/admin/settings/register.php:212
+#: includes/functions.php:90
+#: includes/functions.php:99
+msgid "User"
+msgstr ""
+
+#: includes/admin/settings/register.php:213
+msgid "Site Admin"
+msgstr ""
+
+#: includes/admin/settings/register.php:214
+msgid "Custom"
+msgstr ""
+
+#: includes/admin/settings/register.php:220
+msgid "Email Address"
+msgstr ""
+
+#: includes/admin/settings/register.php:224
+msgid "The email address this notice should be sent to."
+msgstr ""
+
+#: includes/admin/settings/register.php:229
+msgid "Email Subject"
+msgstr ""
+
+#: includes/admin/settings/register.php:233
+msgid "The subject of this email."
+msgstr ""
+
+#: includes/admin/settings/register.php:238
+msgid "Email Header"
+msgstr ""
+
+#: includes/admin/settings/register.php:242
+msgid "The header of this email."
+msgstr ""
+
+#: includes/admin/settings/register.php:247
+msgid "Email Message"
+msgstr ""
+
+#: includes/admin/settings/register.php:251
+msgid "The email message to be sent. HTML is accepted. Available template tags:"
+msgstr ""
+
+#: includes/functions.php:24
+msgid "Purchase Status Change"
+msgstr ""
+
+#: includes/functions.php:25
+msgid "Abandoned Cart"
+msgstr ""
+
+#: includes/functions.php:26
+msgid "Purchase Amount At Least"
+msgstr ""
+
+#: includes/functions.php:27
+msgid "Pending Payment"
+msgstr ""
+
+#: includes/functions.php:31
+#: includes/functions.php:62
+msgid "License Upgrade"
+msgstr ""
+
+#: includes/functions.php:32
+#: includes/functions.php:65
+msgid "License Renewal"
+msgstr ""
+
+#: includes/functions.php:50
+msgid "Status change (%1$s-%2$s)"
+msgstr ""
+
+#: includes/functions.php:53
+msgid "Abandoned cart"
+msgstr ""
+
+#: includes/functions.php:56
+msgid "Purchase amount at least (%1$s)"
+msgstr ""
+
+#: includes/functions.php:59
+msgid "Pending payment"
+msgstr ""
+
+#: includes/functions.php:68
+msgid "Condition unknown"
+msgstr ""
+
+#: includes/functions.php:93
+msgid "Site Admin (%s)"
+msgstr ""
+
+#: includes/functions.php:96
+msgid "Custom (%s)"
+msgstr ""
+
+#: includes/functions.php:147
+msgid "A list of download links for each download purchased"
+msgstr ""
+
+#: includes/functions.php:148
+msgid "A plain-text list of download URLs for each download purchased"
+msgstr ""
+
+#: includes/functions.php:149
+msgid "The buyer's first name"
+msgstr ""
+
+#: includes/functions.php:150
+msgid "The buyer's full name, first and last"
+msgstr ""
+
+#: includes/functions.php:151
+msgid "The buyer's user name on the site, if they registered an account"
+msgstr ""
+
+#: includes/functions.php:152
+msgid "The buyer's email address"
+msgstr ""
+
+#: includes/functions.php:153
+msgid "The buyer's billing address"
+msgstr ""
+
+#: includes/functions.php:154
+msgid "The date of the purchase"
+msgstr ""
+
+#: includes/functions.php:155
+msgid "The price of the purchase before taxes"
+msgstr ""
+
+#: includes/functions.php:156
+msgid "The taxed amount of the purchase"
+msgstr ""
+
+#: includes/functions.php:157
+msgid "The total price of the purchase"
+msgstr ""
+
+#: includes/functions.php:158
+msgid "The unique ID number for this purchase"
+msgstr ""
+
+#: includes/functions.php:159
+msgid "The unique ID number for this purchase receipt"
+msgstr ""
+
+#: includes/functions.php:160
+msgid "The method of payment used for this purchase"
+msgstr ""
+
+#: includes/functions.php:161
+msgid "Your site name"
+msgstr ""
+
+#: includes/functions.php:162
+msgid "Adds a link so users can view their receipt directly on your website if they are unable to view it in the browser correctly."
+msgstr ""
+
+#: includes/functions.php:163
+msgid "Adds a list of any discount codes applied to this purchase"
+msgstr ""
+
+#: includes/functions.php:164
+msgid "The buyer's IP Address"
+msgstr ""
+
+#: includes/functions.php:167
+msgid "Show all purchased licenses"
+msgstr ""
+
+#: includes/functions.php:168
+msgid "Show the license key for this upgrade"
+msgstr ""
+
+#: includes/functions.php:169
+msgid "Show the product for this upgrade"
+msgstr ""
+
+#: includes/functions.php:173
+msgid "CFM fields can be added by entering their meta key name as an email tag."
+msgstr ""
+
+#: includes/post-types.php:24
+msgctxt "post type general name"
+msgid "Emails"
+msgstr ""
+
+#: includes/post-types.php:25
+msgctxt "post type singular name"
+msgid "Email"
+msgstr ""
+
+#: includes/post-types.php:26
+msgid "Add New"
+msgstr ""
+
+#: includes/post-types.php:27
+msgid "Add New Email"
+msgstr ""
+
+#: includes/post-types.php:29
+msgid "New Email"
+msgstr ""
+
+#: includes/post-types.php:30
+msgid "All Emails"
+msgstr ""
+
+#: includes/post-types.php:31
+msgid "View Email"
+msgstr ""
+
+#: includes/post-types.php:32
+msgid "Search Emails"
+msgstr ""
+
+#: includes/post-types.php:33
+msgid "No Emails found"
+msgstr ""
+
+#: includes/post-types.php:34
+msgid "No Emails found in Trash"
+msgstr ""
