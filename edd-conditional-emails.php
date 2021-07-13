@@ -1,15 +1,15 @@
 <?php
 /**
  * Plugin Name:     Easy Digital Downloads - Conditional Emails
- * Plugin URI:      https://easydigitaldownloads.com/extensions/conditional-emails
+ * Plugin URI:      https://easydigitaldownloads.com/downloads/conditional-emails
  * Description:     Send notification emails based on conditional events
- * Version:         1.1.1
+ * Version:         1.1.2
  * Author:          Sandhills Development, LLC
- * Author URI:      https://easydigitaldownloads.com
+ * Author URI:      https://sandhillsdev.com
  * Text Domain:     edd-conditional-emails
  *
  * @package         EDD\ConditionalEmails
- * @copyright       Copyright (c) 2019, Sandhills Development, LLC
+ * @copyright       Copyright (c) 2021, Sandhills Development, LLC
  */
 
 
@@ -66,7 +66,7 @@ if( ! class_exists( 'EDD_Conditional_Emails' ) ) {
 		 */
 		private function setup_constants() {
 			// Plugin version
-			define( 'EDD_CONDITIONAL_EMAILS_VER', '1.1.1' );
+			define( 'EDD_CONDITIONAL_EMAILS_VER', '1.1.2' );
 
 			// Plugin path
 			define( 'EDD_CONDITIONAL_EMAILS_DIR', plugin_dir_path( __FILE__ ) );
@@ -105,9 +105,9 @@ if( ! class_exists( 'EDD_Conditional_Emails' ) ) {
 		 * @return      void
 		 */
 		private function hooks() {
-			// Handle licensing
-			if( class_exists( 'EDD_License' ) ) {
-				$license = new EDD_License( __FILE__, 'Conditional Emails', EDD_CONDITIONAL_EMAILS_VER, 'Daniel J Griffiths' );
+			// Handle licensing.
+			if ( class_exists( 'EDD_License' ) ) {
+				$license = new EDD_License( __FILE__, 'Conditional Emails', EDD_CONDITIONAL_EMAILS_VER, 'Sandhills Development, LLC', null, null, 394970 );
 			}
 		}
 
